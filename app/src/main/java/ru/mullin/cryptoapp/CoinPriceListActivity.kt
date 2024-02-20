@@ -5,6 +5,8 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import io.reactivex.disposables.CompositeDisposable
+import ru.mullin.cryptoapp.adapter.CoinInfoAdapter
+import ru.mullin.cryptoapp.databinding.ActivityCoinPriceListBinding
 
 class CoinPriceListActivity : AppCompatActivity() {
 
@@ -12,13 +14,23 @@ class CoinPriceListActivity : AppCompatActivity() {
     private val viewModel: CoinViewModel by lazy {
         ViewModelProvider(this)[CoinViewModel::class.java]
     }
+    private val binding by lazy {
+        ActivityCoinPriceListBinding.inflate(layoutInflater)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_coin_price_list)
-        viewModel.priceList.observe(this) {
-            Log.d("TEST_OF_LOADING_DATA", "Success in activity")
+        setContentView(binding.root)
+        val adapter = CoinInfoAdapter(this) {
+            Log.d("ON_CLICK_TEST", it.toString())
         }
+
+        binding.rvCoinPriceList.adapter = adapter
+        viewModel.priceList.observe(this) {
+            adapter.coinInfoList = it
+        }
+
+
     }
 
     override fun onDestroy() {
