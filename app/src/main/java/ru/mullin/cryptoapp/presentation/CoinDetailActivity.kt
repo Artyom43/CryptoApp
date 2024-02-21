@@ -6,7 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.squareup.picasso.Picasso
+import ru.mullin.cryptoapp.data.network.ApiFactory
 import ru.mullin.cryptoapp.databinding.ActivityCoinDetailBinding
+import ru.mullin.cryptoapp.utils.convertTimeStampToTime
 
 class CoinDetailActivity : AppCompatActivity() {
 
@@ -20,23 +22,24 @@ class CoinDetailActivity : AppCompatActivity() {
             finish()
             return
         }
-        val fromSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL)
-        viewModel.getDetailInfo(fromSymbol!!).observe(this) {
+        val fromSymbol = intent.getStringExtra(EXTRA_FROM_SYMBOL) ?: EMPTY_FROM_SYMBOL
+        viewModel.getDetailInfo(fromSymbol).observe(this) {
             with(viewBinding) {
                 tvPrice.text = it.price
                 tvMinPrice.text = it.lowDay
                 tvMaxPrice.text = it.highDay
                 tvLastMarket.text = it.lastMarket
-                tvLastUpdate.text = it.getFormattedTime()
+                tvLastUpdate.text = convertTimeStampToTime(it.lastUpdate)
                 tvFromSymbol.text = it.fromSymbol
                 tvToSymbol.text = it.toSymbol
-                Picasso.get().load(it.getFullImageUrl()).into(ivLogoCoin)
+                Picasso.get().load(ApiFactory.BASE_IMAGE_URL + it.imageUrl).into(ivLogoCoin)
             }
         }
     }
 
     companion object {
         private const val EXTRA_FROM_SYMBOL = "fSym"
+        private const val EMPTY_FROM_SYMBOL = ""
 
         fun newIntent(context: Context, fromSymbol: String): Intent {
             return Intent(context, CoinDetailActivity::class.java).apply {

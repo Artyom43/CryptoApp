@@ -1,26 +1,25 @@
 package ru.mullin.cryptoapp.data.network
 
-import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.mullin.cryptoapp.data.model.CoinInfoListOfData
-import ru.mullin.cryptoapp.data.model.CoinPriceInfoRawData
+import ru.mullin.cryptoapp.data.network.model.CoinInfoJsonContainerDto
+import ru.mullin.cryptoapp.data.network.model.CoinNamesListDto
 
 interface ApiService {
 
     @GET("top/totalvolfull")
-    fun getTopCoinsInfo(
+    suspend fun getTopCoinsInfo(
         @Query(QUERY_PARAM_API_KEY) apiKey: String = MY_API_KEY,
         @Query(QUERY_PARAM_LIMIT) limit: Int = 10,
         @Query(QUERY_PARAM_TO_SYMBOL) tsym: String = CURRENCY,
-    ): Single<CoinInfoListOfData>
+    ): CoinNamesListDto
 
     @GET("pricemultifull")
-    fun getFullPriceList(
+    suspend fun getFullPriceList(
         @Query(QUERY_PARAM_API_KEY) apiKey: String = MY_API_KEY,
         @Query(QUERY_PARAM_FROM_SYMBOLS) fsyms: String,
         @Query(QUERY_PARAM_TO_SYMBOLS) tsyms: String = CURRENCY,
-    ): Single<CoinPriceInfoRawData>
+    ): CoinInfoJsonContainerDto
 
 
     companion object {

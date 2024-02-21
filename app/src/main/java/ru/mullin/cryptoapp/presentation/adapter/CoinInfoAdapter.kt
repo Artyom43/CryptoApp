@@ -7,15 +7,17 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.squareup.picasso.Picasso
 import ru.mullin.cryptoapp.R
+import ru.mullin.cryptoapp.data.network.ApiFactory
 import ru.mullin.cryptoapp.databinding.ItemCoinInfoBinding
-import ru.mullin.cryptoapp.data.model.CoinPriceInfo
+import ru.mullin.cryptoapp.domain.CoinInfo
+import ru.mullin.cryptoapp.utils.convertTimeStampToTime
 
 class CoinInfoAdapter(
     private val context: Context,
-    private val onCoinClick: (CoinPriceInfo) -> Unit
+    private val onCoinClick: (CoinInfo) -> Unit
 ) : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinInfoList: List<CoinPriceInfo> = listOf()
+    var coinInfoList: List<CoinInfo> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -46,22 +48,22 @@ class CoinInfoAdapter(
         private val itemViewBinding: ItemCoinInfoBinding
     ) : ViewHolder(itemViewBinding.root) {
 
-        fun bind(coinPriceInfo: CoinPriceInfo) {
+        fun bind(coinInfo: CoinInfo) {
             with(itemViewBinding) {
                 val symbolsTemplate = context.getString(R.string.symbols_template)
                 val lastUpdateAtTemplate = context.getString(R.string.last_update_template)
                 tvSymbols.text = String.format(
                     symbolsTemplate,
-                    coinPriceInfo.fromSymbol,
-                    coinPriceInfo.toSymbol
+                    coinInfo.fromSymbol,
+                    coinInfo.toSymbol
                 )
-                tvPrice.text = coinPriceInfo.price
+                tvPrice.text = coinInfo.price
                 tvLastUpdate.text = String.format(
                     lastUpdateAtTemplate,
-                    coinPriceInfo.getFormattedTime()
+                    convertTimeStampToTime(coinInfo.lastUpdate)
                 )
 
-                Picasso.get().load(coinPriceInfo.getFullImageUrl()).into(ivLogoCoin)
+                Picasso.get().load(ApiFactory.BASE_IMAGE_URL + coinInfo.imageUrl).into(ivLogoCoin)
             }
         }
     }

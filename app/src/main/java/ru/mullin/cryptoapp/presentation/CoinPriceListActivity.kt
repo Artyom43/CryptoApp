@@ -3,8 +3,8 @@ package ru.mullin.cryptoapp.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import ru.mullin.cryptoapp.presentation.adapter.CoinInfoAdapter
 import ru.mullin.cryptoapp.databinding.ActivityCoinPriceListBinding
+import ru.mullin.cryptoapp.presentation.adapter.CoinInfoAdapter
 
 class CoinPriceListActivity : AppCompatActivity() {
     private val viewModel: CoinViewModel by lazy {
@@ -23,7 +23,7 @@ class CoinPriceListActivity : AppCompatActivity() {
         }
 
         binding.rvCoinPriceList.adapter = adapter
-        viewModel.priceList.observe(this) {
+        viewModel.coinInfoList.observe(this) {
             adapter.coinInfoList = it
         }
     }
