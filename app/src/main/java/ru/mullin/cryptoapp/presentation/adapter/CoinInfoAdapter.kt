@@ -7,10 +7,8 @@ import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.squareup.picasso.Picasso
 import ru.mullin.cryptoapp.R
-import ru.mullin.cryptoapp.data.network.ApiFactory
 import ru.mullin.cryptoapp.databinding.ItemCoinInfoBinding
 import ru.mullin.cryptoapp.domain.CoinInfo
-import ru.mullin.cryptoapp.utils.convertTimeStampToTime
 
 class CoinInfoAdapter(
     private val context: Context,
@@ -60,10 +58,10 @@ class CoinInfoAdapter(
                 tvPrice.text = coinInfo.price
                 tvLastUpdate.text = String.format(
                     lastUpdateAtTemplate,
-                    convertTimeStampToTime(coinInfo.lastUpdate)
+                    coinInfo.lastUpdate
                 )
 
-                Picasso.get().load(ApiFactory.BASE_IMAGE_URL + coinInfo.imageUrl).into(ivLogoCoin)
+                Picasso.get().load(coinInfo.imageUrl).into(ivLogoCoin)
             }
         }
     }

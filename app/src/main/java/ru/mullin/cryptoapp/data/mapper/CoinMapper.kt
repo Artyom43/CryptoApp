@@ -6,6 +6,11 @@ import ru.mullin.cryptoapp.data.network.model.CoinInfoDto
 import ru.mullin.cryptoapp.data.network.model.CoinInfoJsonContainerDto
 import ru.mullin.cryptoapp.data.network.model.CoinNamesListDto
 import ru.mullin.cryptoapp.domain.CoinInfo
+import java.sql.Date
+import java.sql.Timestamp
+import java.text.SimpleDateFormat
+import java.util.Locale
+import java.util.TimeZone
 
 class CoinMapper {
 
@@ -18,7 +23,7 @@ class CoinMapper {
             highDay = highDay,
             lowDay = lowDay,
             lastMarket = lastMarket,
-            imageUrl = imageUrl
+            imageUrl = BASE_IMAGE_URL + imageUrl
         )
     }
 
@@ -47,7 +52,7 @@ class CoinMapper {
             fromSymbol = fromSymbol,
             toSymbol = toSymbol,
             price = price,
-            lastUpdate = lastUpdate,
+            lastUpdate = convertTimeStampToTime(lastUpdate),
             highDay = highDay,
             lowDay = lowDay,
             lastMarket = lastMarket,
@@ -55,5 +60,20 @@ class CoinMapper {
         )
     }
 
+    private fun convertTimeStampToTime(timeStamp: Long?): String {
+        timeStamp?.let {
+            val stamp = Timestamp(timeStamp * 1000)
+            val date = Date(stamp.time)
+            val pattern = "HH:mm:ss"
+            val sdf = SimpleDateFormat(pattern, Locale.getDefault())
+            sdf.timeZone = TimeZone.getDefault()
+            return sdf.format(date)
+        }
+        return ""
+    }
+
+    companion object {
+        const val BASE_IMAGE_URL = "https://cryptocompare.com"
+    }
 
 }
