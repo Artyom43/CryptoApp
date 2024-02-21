@@ -3,7 +3,7 @@ package ru.mullin.cryptoapp.presentation.adapter
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.squareup.picasso.Picasso
 import ru.mullin.cryptoapp.R
@@ -13,13 +13,7 @@ import ru.mullin.cryptoapp.domain.CoinInfo
 class CoinInfoAdapter(
     private val context: Context,
     private val onCoinClick: (CoinInfo) -> Unit
-) : RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
-
-    var coinInfoList: List<CoinInfo> = listOf()
-        set(value) {
-            field = value
-            notifyDataSetChanged()
-        }
+) : ListAdapter<CoinInfo, CoinInfoAdapter.CoinInfoViewHolder>(CoinInfoDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CoinInfoViewHolder {
         val itemBinding =
@@ -31,10 +25,8 @@ class CoinInfoAdapter(
         return CoinInfoViewHolder(itemBinding)
     }
 
-    override fun getItemCount() = coinInfoList.size
-
     override fun onBindViewHolder(holder: CoinInfoViewHolder, position: Int) {
-        val coinPriceInfo = coinInfoList[position]
+        val coinPriceInfo = getItem(position)
         holder.bind(coinPriceInfo)
         holder.itemView.setOnClickListener {
             onCoinClick(coinPriceInfo)
