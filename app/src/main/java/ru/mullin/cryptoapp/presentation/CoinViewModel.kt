@@ -3,8 +3,6 @@ package ru.mullin.cryptoapp.presentation
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.viewModelScope
-import kotlinx.coroutines.launch
 import ru.mullin.cryptoapp.data.repo.CoinRepositoryImpl
 import ru.mullin.cryptoapp.domain.CoinInfo
 import ru.mullin.cryptoapp.domain.CoinRepository
@@ -25,9 +23,7 @@ class CoinViewModel(
 
 
     init {
-        viewModelScope.launch {
-            loadDataUseCase()
-        }
+        loadDataUseCase()
     }
 
     fun getDetailInfo(fSym: String): LiveData<CoinInfo> {
