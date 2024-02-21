@@ -1,4 +1,4 @@
-package ru.mullin.cryptoapp.api
+package ru.mullin.cryptoapp.data.network
 
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory

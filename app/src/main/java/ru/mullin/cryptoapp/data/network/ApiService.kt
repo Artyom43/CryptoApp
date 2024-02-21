@@ -1,10 +1,10 @@
-package ru.mullin.cryptoapp.api
+package ru.mullin.cryptoapp.data.network
 
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import ru.mullin.cryptoapp.pojo.CoinInfoListOfData
-import ru.mullin.cryptoapp.pojo.CoinPriceInfoRawData
+import ru.mullin.cryptoapp.data.model.CoinInfoListOfData
+import ru.mullin.cryptoapp.data.model.CoinPriceInfoRawData
 
 interface ApiService {
 

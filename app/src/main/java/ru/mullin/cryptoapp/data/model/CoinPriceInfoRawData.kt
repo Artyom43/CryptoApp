@@ -1,4 +1,4 @@
-package ru.mullin.cryptoapp.pojo
+package ru.mullin.cryptoapp.data.model
 
 import com.google.gson.JsonObject
 import com.google.gson.annotations.Expose

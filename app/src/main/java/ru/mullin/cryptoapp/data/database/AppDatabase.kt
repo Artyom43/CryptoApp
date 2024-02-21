@@ -1,10 +1,10 @@
-package ru.mullin.cryptoapp.database
+package ru.mullin.cryptoapp.data.database
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import ru.mullin.cryptoapp.pojo.CoinPriceInfo
+import ru.mullin.cryptoapp.data.model.CoinPriceInfo
 
 @Database(entities = [CoinPriceInfo::class], version = 1, exportSchema = false)
 abstract class AppDatabase : RoomDatabase(){

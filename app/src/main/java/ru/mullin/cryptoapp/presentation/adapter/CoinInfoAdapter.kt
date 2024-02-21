@@ -1,4 +1,4 @@
-package ru.mullin.cryptoapp.adapter
+package ru.mullin.cryptoapp.presentation.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import androidx.recyclerview.widget.RecyclerView.ViewHolder
 import com.squareup.picasso.Picasso
 import ru.mullin.cryptoapp.R
 import ru.mullin.cryptoapp.databinding.ItemCoinInfoBinding
-import ru.mullin.cryptoapp.pojo.CoinPriceInfo
+import ru.mullin.cryptoapp.data.model.CoinPriceInfo
 
 class CoinInfoAdapter(
     private val context: Context,

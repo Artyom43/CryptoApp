@@ -1,9 +1,9 @@
-package ru.mullin.cryptoapp
+package ru.mullin.cryptoapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
-import ru.mullin.cryptoapp.adapter.CoinInfoAdapter
+import ru.mullin.cryptoapp.presentation.adapter.CoinInfoAdapter
 import ru.mullin.cryptoapp.databinding.ActivityCoinPriceListBinding
 
 class CoinPriceListActivity : AppCompatActivity() {

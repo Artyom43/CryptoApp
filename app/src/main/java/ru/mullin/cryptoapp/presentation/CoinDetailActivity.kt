@@ -1,4 +1,4 @@
-package ru.mullin.cryptoapp
+package ru.mullin.cryptoapp.presentation
 
 import android.content.Context
 import android.content.Intent

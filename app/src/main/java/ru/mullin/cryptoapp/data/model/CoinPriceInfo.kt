@@ -1,10 +1,10 @@
-package ru.mullin.cryptoapp.pojo
+package ru.mullin.cryptoapp.data.model
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
-import ru.mullin.cryptoapp.api.ApiFactory.BASE_IMAGE_URL
+import ru.mullin.cryptoapp.data.network.ApiFactory.BASE_IMAGE_URL
 import ru.mullin.cryptoapp.utils.convertTimeStampToTime
 
 @Entity(tableName = "full_price_list")

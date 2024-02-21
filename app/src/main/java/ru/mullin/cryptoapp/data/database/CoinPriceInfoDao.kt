@@ -1,11 +1,11 @@
-package ru.mullin.cryptoapp.database
+package ru.mullin.cryptoapp.data.database
 
 import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
-import ru.mullin.cryptoapp.pojo.CoinPriceInfo
+import ru.mullin.cryptoapp.data.model.CoinPriceInfo
 
 @Dao
 interface CoinPriceInfoDao {
