@@ -1,8 +1,9 @@
 package ru.mullin.cryptoapp.domain
 
 import androidx.lifecycle.LiveData
+import javax.inject.Inject
 
-class GetCoinInfoUseCase(
+class GetCoinInfoUseCase @Inject constructor(
     private val coinRepository: CoinRepository
 ) {
 

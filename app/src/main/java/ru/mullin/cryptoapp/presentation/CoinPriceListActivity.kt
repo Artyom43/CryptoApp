@@ -3,19 +3,32 @@ package ru.mullin.cryptoapp.presentation
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
+import ru.mullin.cryptoapp.CoinApp
 import ru.mullin.cryptoapp.R
 import ru.mullin.cryptoapp.databinding.ActivityCoinPriceListBinding
 import ru.mullin.cryptoapp.presentation.adapter.CoinInfoAdapter
+import javax.inject.Inject
 
 class CoinPriceListActivity : AppCompatActivity() {
-    private val viewModel: CoinViewModel by lazy {
-        ViewModelProvider(this)[CoinViewModel::class.java]
+    @Inject
+    lateinit var viewModelFactory: ViewModelFactory
+
+    private val viewModel by lazy {
+        ViewModelProvider(
+            this,
+            viewModelFactory
+        )[CoinViewModel::class.java]
     }
     private val binding by lazy {
         ActivityCoinPriceListBinding.inflate(layoutInflater)
     }
 
+    private val component by lazy {
+        (application as CoinApp).component
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
+        component.inject(this)
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         val adapter = CoinInfoAdapter(this) {
